@@ -5,12 +5,6 @@
 #include <CLI/CLI.hpp>
 #include <spdlog/spdlog.h>
 
-// This file will be generated automatically when you run the CMake configuration step.
-// It creates a namespace called `adventofcode22`.
-// You can modify the source template at `configured_files/config.hpp.in`.
-#include <internal_use_only/config.hpp>
-
-
 // NOLINTNEXTLINE(bugprone-exception-escape)
 int main(int argc, const char **argv)
 {

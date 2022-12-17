@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...3.23)
+cmake_minimum_required(VERSION 3.24)
 
 # Not ideal to use this global variable, but necessary to make sure
 # that tooling and projects use the same version
@@ -27,10 +27,6 @@ FetchContent_Declare(_project_options URL https://github.com/aminya/project_opti
 FetchContent_MakeAvailable(_project_options)
 include(${_project_options_SOURCE_DIR}/Index.cmake)
 
-# uncomment to enable vcpkg:
-# # Setup vcpkg - should be called before defining project()
-# run_vcpkg()
-
 # Set the project name and language
 project(
   adventofcode22
@@ -39,12 +35,6 @@ project(
   HOMEPAGE_URL "https://github.com/araex/adventofcode22"
   LANGUAGES CXX C)
 
-# This variable is set by project() in CMake 3.21+
-string(
-  COMPARE EQUAL
-          "${CMAKE_SOURCE_DIR}"
-          "${PROJECT_SOURCE_DIR}"
-          PROJECT_IS_TOP_LEVEL)
 if(PROJECT_IS_TOP_LEVEL)
   # Consider the CTest module, which creates targets and options!
   # Only needed if you want to enable submissions to a CDash server.
@@ -126,9 +116,6 @@ target_compile_features(project_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 add_library(adventofcode22::project_options INTERFACE IMPORTED)
 add_library(adventofcode22::project_warnings INTERFACE IMPORTED)
 
-# configure files based on CMake configuration options
-add_subdirectory(configured_files)
-
 # Adding the src:
 add_subdirectory(src)
 
@@ -138,12 +125,6 @@ if(ENABLE_TESTING)
   enable_testing()
   message(AUTHOR_WARNING "Building Tests. Be sure to check out test/constexpr_tests.cpp for constexpr testing")
   add_subdirectory(test)
-endif()
-
-option(ENABLE_FUZZING "Enable the fuzz tests" OFF)
-if(ENABLE_FUZZING)
-  message(AUTHOR_WARNING "Building Fuzz Tests, using fuzzing sanitizer https://www.llvm.org/docs/LibFuzzer.html")
-  add_subdirectory(fuzz_test)
 endif()
 
 # If MSVC is being used, and ASAN is enabled, we need to set the debugger environment
