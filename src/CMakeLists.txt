@@ -1,11 +1,6 @@
 find_package(fmt CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
-find_package(CLI11 CONFIG REQUIRED)
+find_package(range-v3 CONFIG REQUIRED)
 
-# Generic test that uses conan libs
-add_executable(intro main.cpp)
-target_link_libraries(
-  intro
-  PUBLIC project_options project_warnings
-  PRIVATE CLI11::CLI11 fmt::fmt spdlog::spdlog)
-
+add_subdirectory(common)
+add_subdirectory(day01)
