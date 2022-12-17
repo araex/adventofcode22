@@ -75,18 +75,6 @@ include(${_project_options_SOURCE_DIR}/src/DynamicProjectOptions.cmake)
 project_options(
   WARNINGS_AS_ERRORS
   ENABLE_CONAN
-  ENABLE_CPPCHECK
-  CPPCHECK_OPTIONS
-  --enable=style,performance,warning,portability
-  --inline-suppr
-  # We cannot act on a bug/missing feature of cppcheck
-  --suppress=cppcheckError
-  --suppress=internalAstError
-  # if a file does not have an internalAstError, we get an unmatchedSuppression error
-  --suppress=unmatchedSuppression
-  --suppress=passedByValue
-  --suppress=syntaxError
-  --inconclusive
 )
 
 target_compile_features(project_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
