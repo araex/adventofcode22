@@ -4,3 +4,4 @@ find_package(range-v3 CONFIG REQUIRED)
 
 add_subdirectory(common)
 add_subdirectory(day01)
+add_subdirectory(day02)
