@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <fstream>
 #include <gsl/gsl>
+#include <optional>
 #include <range/v3/all.hpp>
 #include <spdlog/spdlog.h>
 #include <stdexcept>
@@ -21,9 +22,9 @@ namespace
     };
 
     static const std::unordered_map<char, Sign> parseSign = {
-        { 'A', Sign::Rock },
-        { 'B', Sign::Paper },
-        { 'C', Sign::Scissors },
+        {'A', Sign::Rock},
+        {'B', Sign::Paper},
+        {'C', Sign::Scissors},
     };
 
     enum class Result
@@ -34,14 +35,14 @@ namespace
     };
 
     static const std::unordered_map<char, Result> parseResult = {
-        { 'X', Result::Loss },
-        { 'Y', Result::Draw },
-        { 'Z', Result::Win },
+        {'X', Result::Loss},
+        {'Y', Result::Draw},
+        {'Z', Result::Win},
     };
 
     Sign whatWinsAgainst(Sign sign)
     {
-        switch (sign)
+        switch(sign)
         {
         case Sign::Rock:
             return Sign::Paper;
@@ -55,7 +56,7 @@ namespace
 
     Sign whatLosesAgainst(Sign sign)
     {
-        switch (sign)
+        switch(sign)
         {
         case Sign::Rock:
             return Sign::Scissors;
@@ -69,7 +70,7 @@ namespace
 
     int getScore(Sign sign)
     {
-        switch (sign)
+        switch(sign)
         {
         case Sign::Rock:
             return 1;
@@ -83,7 +84,7 @@ namespace
 
     int getScore(Result result)
     {
-        switch (result)
+        switch(result)
         {
         case Result::Win:
             return 6;
@@ -94,7 +95,7 @@ namespace
         }
         std::terminate();
     }
-}
+} // namespace
 
 int main(int /*argc*/, const char ** /*argv*/)
 {
@@ -102,14 +103,14 @@ int main(int /*argc*/, const char ** /*argv*/)
     std::string line;
 
     int totalScore = 0;
-    while (std::getline(in, line))
+    while(std::getline(in, line))
     {
-        const Sign theirMove{ parseSign.at(line[0]) };
-        const Result expectedResult{ parseResult.at(line[2]) };
+        const Sign theirMove{parseSign.at(line[0])};
+        const Result expectedResult{parseResult.at(line[2])};
         totalScore += getScore(expectedResult);
 
         std::optional<Sign> myMove;
-        switch (expectedResult)
+        switch(expectedResult)
         {
         case Result::Win:
             myMove = whatWinsAgainst(theirMove);

@@ -20,9 +20,9 @@ namespace
         {
             return false;
         }
-        const size_t numberOfDigits
+        const long int numberOfDigits
             = rng::distance(s | rng::views::filter([](const char c) { return std::isdigit(c); }));
-        return numberOfDigits == s.size();
+        return numberOfDigits == static_cast<long int>(s.size());
     }
 
     struct Instruction
@@ -32,9 +32,9 @@ namespace
         int to = -1;
     };
 
-    Instruction parseInstruction(std::string s)
+    Instruction parseInstruction(std::string instruction)
     {
-        auto numbers = s | rng::views::split(' ') | ax::to_string
+        auto numbers = instruction | rng::views::split(' ') | ax::to_string
                        | rng::views::filter([](const std::string &s) { return isNumber(s); }) | ax::stoi
                        | rng::to_vector;
         assert(numbers.size() == 3);

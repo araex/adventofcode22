@@ -32,13 +32,14 @@ namespace
 
     bool fullyContains(Assignment a)
     {
-        auto contains = [](const Section &a, const Section &b) { return a.from <= b.from && a.to >= b.to; };
+        auto contains = [](const Section &lhs, const Section &rhs) { return lhs.from <= rhs.from && lhs.to >= rhs.to; };
         return contains(a.first, a.second) || contains(a.second, a.first);
     }
 
     bool overlaps(Assignment a)
     {
-        auto overlaps_ = [](const Section &a, const Section &b) { return a.from <= b.to && a.to >= b.from; };
+        auto overlaps_
+            = [](const Section &lhs, const Section &rhs) { return lhs.from <= rhs.to && lhs.to >= rhs.from; };
         return overlaps_(a.first, a.second);
     }
 

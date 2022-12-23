@@ -6,10 +6,10 @@
 
 namespace ax
 {
-    inline constexpr auto to_string_view
-        = ranges::views::transform([](auto &&rng) { return std::string_view(&*rng.begin(), ranges::distance(rng)); });
-    inline constexpr auto to_string
-        = ranges::views::transform([](auto &&rng) { return std::string(&*rng.begin(), ranges::distance(rng)); });
+    inline constexpr auto to_string_view = ranges::views::transform(
+        [](auto &&rng) { return std::string_view(&*rng.begin(), static_cast<size_t>(ranges::distance(rng))); });
+    inline constexpr auto to_string = ranges::views::transform(
+        [](auto &&rng) { return std::string(&*rng.begin(), static_cast<size_t>(ranges::distance(rng))); });
 
     inline constexpr auto from_chars = ranges::views::transform([](const std::string_view v) {
         int i;
