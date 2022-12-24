@@ -8,6 +8,5 @@ target_link_libraries(${targetName}
 )
 
 add_custom_target(${targetName}-copy-data ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data)
-
-add_dependencies(${targetName} ${targetName}-copy-data)
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data
+    DEPENDS ${targetName} )

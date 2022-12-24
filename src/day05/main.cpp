@@ -170,16 +170,6 @@ namespace
 
 int main(int /*argc*/, const char ** /*argv*/)
 {
-
-
-    // const auto blub = stacks | rng::views::transform([](auto r) { return r | rng::views::reverse |
-    // rng::to_vector;
-    // });
-    // auto print = stacks
-    //              // prepare for print with fmt
-    //              | rng::views::transform([](auto r) { return r | rng::to_vector; }) | rng::to_vector;
-    // spdlog::info("{}", fmt::join(print, "\n"));
-    // spdlog::info("{}", print);
     Part1();
     Part2();
 }
